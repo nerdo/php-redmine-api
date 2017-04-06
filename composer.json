@@ -1,8 +1,8 @@
 {
-    "name": "kbsali/redmine-api",
+    "name": "nerdo/redmine-api",
     "type": "library",
-    "description": "Redmine API client",
-    "homepage": "https://github.com/kbsali/php-redmine-api",
+    "description": "Redmine API client fork of https://github.com/kbsali/php-redmine-api to support custom authentication header to use with Chiliproject and any other Redmine-compatible APIs that use different header names.",
+    "homepage": "https://github.com/nerdo/php-redmine-api",
     "keywords": ["redmine", "api"],
     "license": "MIT",
     "authors": [
@@ -10,6 +10,9 @@
             "name": "Kevin Saliou",
             "email": "kevin@saliou.name",
             "homepage": "http://kevin.saliou.name"
+        },
+        {
+            "name": "Dannel Albert"
         }
     ],
     "require": {
