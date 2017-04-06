@@ -61,6 +61,16 @@ class Client
     private $apikeyOrUsername;
 
     /**
+     * @var string
+     */
+    private $apikeyHeaderName = 'X-Redmine-API-Key';
+
+    /**
+     * @var string
+     */
+    private $impersonateUserHeaderName = 'X-Redmine-Switch-User';
+
+    /**
      * @var string|null
      */
     private $pass;
@@ -441,6 +451,52 @@ class Client
     }
 
     /**
+     * Set the name of the HTTP header used to set the API key for authentication
+     * @param string  $name
+     * @return Client
+     */
+    public function setApikeyHeaderName($name = null)
+    {
+        if (strlen($name)) {
+            $this->apikeyHeaderName = $name;
+        }
+
+        return $this;
+    }
+
+    /**
+     * Returns the name of the HTTP header used to set the API key for authentication
+     * @return string
+     */
+    public function getApikeyHeaderName()
+    {
+        return $this->apikeyHeaderName;
+    }
+
+    /**
+     * Set the name of the HTTP header used to impersonate a user
+     * @param string  $name
+     * @return Client
+     */
+    public function setImpersonateUserHeaderName($name = null)
+    {
+        if (strlen($name)) {
+            $this->impersonateUserHeaderName = $name;
+        }
+
+        return $this;
+    }
+
+    /**
+     * Returns the name of the HTTP header used to impersonate a user
+     * @return string
+     */
+    public function getImpersonateUserHeaderName()
+    {
+        return $this->impersonateUserHeaderName;
+    }
+
+    /**
      * Sets to an existing username so api calls can be
      * impersonated to this user.
      *
@@ -618,10 +674,10 @@ class Client
 
         // Redmine specific headers
         if ($this->impersonateUser !== null) {
-            $httpHeader[] = 'X-Redmine-Switch-User: '.$this->impersonateUser;
+            $httpHeader[] = $this->impersonateUserHeaderName.': '.$this->impersonateUser;
         }
         if (null === $this->pass) {
-            $httpHeader[] = 'X-Redmine-API-Key: '.$this->apikeyOrUsername;
+            $httpHeader[] = $this->apikeyHeaderName.': '.$this->apikeyOrUsername;
         }
 
         return $httpHeader;
